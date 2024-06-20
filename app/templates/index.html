@@ -1,17 +1,18 @@
 {% extends "base.html" %}
 
+{% block title %}Home{% endblock %}
+
 {% block content %}
-  <h1 class="mt-5">My Diary</h1>
-  <div class="list-group">
-    {% for entry in entries %}
-      <a href="{{ url_for('main.edit_entry', entry_id=entry.id) }}" class="list-group-item list-group-item-action">
-        <h5 class="mb-1">{{ entry.title }}</h5>
-        <small>{{ entry.timestamp.strftime('%Y-%m-%d %H:%M') }}</small>
-        <p class="mb-1">{{ entry.content[:100] }}...</p>
-        <form action="{{ url_for('main.delete_entry', entry_id=entry.id) }}" method="post" style="display:inline;">
-          <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-        </form>
-      </a>
-    {% endfor %}
-  </div>
+<h1>Welcome to ITX-Diary</h1>
+{% for entry in entries %}
+<div class="card my-3">
+    <div class="card-body">
+        <h5 class="card-title">{{ entry.title }}</h5>
+        <p class="card-text">{{ entry.content }}</p>
+        <p class="card-text"><small class="text-muted">{{ entry.date_posted }}</small></p>
+        <a href="{{ url_for('main.edit_entry', entry_id=entry.id) }}" class="btn btn-primary">Edit</a>
+        <a href="{{ url_for('main.delete_entry', entry_id=entry.id) }}" class="btn btn-danger">Delete</a>
+    </div>
+</div>
+{% endfor %}
 {% endblock %}

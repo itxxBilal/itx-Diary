@@ -1,16 +1,18 @@
 {% extends "base.html" %}
 
+{% block title %}Add/Edit Entry{% endblock %}
+
 {% block content %}
-  <h1 class="mt-5">Add Entry</h1>
-  <form method="post">
+<h1>{% if entry %}Edit{% else %}Add{% endif %} Entry</h1>
+<form method="POST" action="">
     <div class="form-group">
-      <label for="title">Title</label>
-      <input type="text" class="form-control" id="title" name="title" required>
+        <label for="title">Title</label>
+        <input type="text" class="form-control" id="title" name="title" value="{{ entry.title if entry else '' }}">
     </div>
     <div class="form-group">
-      <label for="content">Content</label>
-      <textarea class="form-control" id="content" name="content" rows="5" required></textarea>
+        <label for="content">Content</label>
+        <textarea class="form-control" id="content" name="content" rows="5">{{ entry.content if entry else '' }}</textarea>
     </div>
-    <button type="submit" class="btn btn-primary">Save</button>
-  </form>
+    <button type="submit" class="btn btn-primary">{% if entry %}Update{% else %}Add{% endif %} Entry</button>
+</form>
 {% endblock %}
